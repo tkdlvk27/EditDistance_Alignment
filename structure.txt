@@ -108,7 +108,6 @@ class Alignment(MatchInformation):
         # Do backtracking.
         self.BACKTRACKING(len(DNA1), len(DNA2), Way_matrix, DNA1, DNA2, "","")
 
-  
     def BACKTRACKING(self, i,j,Way_matrix,DNA1,DNA2,Result_DNA1,Result_DNA2):
         # print results
         if ((i==0) and (j==0)):
@@ -117,7 +116,15 @@ class Alignment(MatchInformation):
             print ("\t"+Result_DNA1)
             print ("\t"+Result_DNA2+"\n")
             return
-		
+        else:
+            if ( Way_matrix[i,j] & 1 ) == 1: # 001
+                self.BACKTRACKING(i-1,j-1, Way_matrix, DNA1, DNA2, DNA1[i-1]+Result_DNA1, DNA2[j-1]+Result_DNA2)
+            if ( Way_matrix[i,j] & 2 ) == 2: # 010
+                self.BACKTRACKING(i-1,j, Way_matrix, DNA1, DNA2, DNA1[i-1]+Result_DNA1, "-" + Result_DNA2)
+            if ( Way_matrix[i,j] & 4 ) == 4: # 100
+                self.BACKTRACKING(i,j-1, Way_matrix, DNA1, DNA2, "-" + Result_DNA1, DNA2[j-1]+Result_DNA2)
+            #Recursive function.
+
 if __name__ == "__main__":
     DNA1 = "GCTGATATAGCT"
     DNA2 = "GGGTGATTAGCT"
