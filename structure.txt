@@ -1,10 +1,13 @@
 import sys
 
+import sys
+
 class MatchInformation(object):
     def __init__(self, match, mismatch, gap):
         self.match = match
         self.mismatch = mismatch
         self.gap = gap
+
     # When the matchscore needs to be fixed
     def setMatch(self,match,mismatch,gap):
         self.match = match
@@ -14,7 +17,6 @@ class MatchInformation(object):
     # get The match information. It returns as list.
     def getMatch(self):
         return [match, mismatch, gap]
-
     def GAP(self, Extension_penalty,Length,OpeningGapPenalty):
         return Extension_penalty * Length+OpeningGapPenalty
 
@@ -25,18 +27,46 @@ class MatchInformation(object):
         else:
             return mismatch
 
-        
 class Alignment(MatchInformation):
+
     def __init__(self, DNA1, DNA2, match, mismatch, gap):
         MatchInformation.__init__(self, match,mismatch,gap)
         self.DNA1 = DNA1
         self.DNA2 = DNA2
-    
-    def setDNA1(self,DNA1):
+        self.matrix = {}
+        self.Way_matrix = {}
+        self.ResultCount = 0
+		
+	def setDNA1(self,DNA1):
         self.DNA1 = DNA1
-    
     def setDNA2(self,DNA2):
         self.DNA2 = DNA2
+
+	def EditDistance(self):
+        print(DNA1)
+        print(DNA2)
+
+        matrix = {}
+        Way_matrix = {} # re-initializing matrices
+
+		for i in range(len(DNA1)+1):
+            Way_matrix[i,0]=2
+        for j in range(len(DNA2)+1):
+            Way_matrix[0,j]=4
+			
+        #init edit matrix
+        for i in range(len(DNA1)+1):
+            for j in range(len(DNA2)+1):
+                matrix[i,j]=0
+                Way_matrix[i,j] = 0
+
+        for i in range(0, len(DNA1)+1 ): # DNA1 is x column axis.
+            matrix[i,0] = i
+
+        for j in range(0, len(DNA2)+1 ):
+            matrix[0,j] = j
+
+
 
 if __name__ == "__main__":
     DNA1 = "GCTGATATAGCT"
@@ -44,5 +74,3 @@ if __name__ == "__main__":
     match = 0
     mismatch = 1
     gap = 1
-
-    
