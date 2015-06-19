@@ -102,13 +102,22 @@ class Alignment(MatchInformation):
                 if matrix[i,j] == (matrix[i,j-1] + self.GAP(1,0,1)):
                     Way_matrix[i,j]=Way_matrix[i,j] + 4     # 100
 
+        # print way matrix
         self.PRINT_MATRIX(Way_matrix, DNA1, DNA2)
+
+        # Do backtracking.
         self.BACKTRACKING(len(DNA1), len(DNA2), Way_matrix, DNA1, DNA2, "","")
 
+  
     def BACKTRACKING(self, i,j,Way_matrix,DNA1,DNA2,Result_DNA1,Result_DNA2):
         # print results
-        
-
+        if ((i==0) and (j==0)):
+            self.ResultCount = self.ResultCount+1
+            print ("case " + str(self.ResultCount)+":")
+            print ("\t"+Result_DNA1)
+            print ("\t"+Result_DNA2+"\n")
+            return
+		
 if __name__ == "__main__":
     DNA1 = "GCTGATATAGCT"
     DNA2 = "GGGTGATTAGCT"
