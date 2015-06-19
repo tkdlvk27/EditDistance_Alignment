@@ -20,7 +20,15 @@ class Alignment(MatchInformation):
         MatchInformation.__init__(self, match,mismatch,gap)
         self.DNA1 = DNA1
         self.DNA2 = DNA2
+    def GAP(self, Extension_penalty,Length,OpeningGapPenalty):
+        return Extension_penalty * Length+OpeningGapPenalty
 
+    # get if match or not
+    def MATCH(self, a, b,match,mismatch):
+        if a==b:
+            return match
+        else:
+            return mismatch
 
 if __name__ == "__main__":
     #
