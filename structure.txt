@@ -1,0 +1,8 @@
+import sys
+
+class MatchInformation(object):
+	#
+
+class Alignment(MatchInformation):
+
+if __name__ == "__main__":
