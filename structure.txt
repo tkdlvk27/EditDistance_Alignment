@@ -1,8 +1,8 @@
 import sys
 
-import sys
-
+# MatchInformation class contains match score, mismatch score, gap score.. etc penalty information.
 class MatchInformation(object):
+    # Constructor function.
     def __init__(self, match, mismatch, gap):
         self.match = match
         self.mismatch = mismatch
@@ -17,6 +17,8 @@ class MatchInformation(object):
     # get The match information. It returns as list.
     def getMatch(self):
         return [match, mismatch, gap]
+
+    # get the match score. Opening Gap penalty occur only one time per one gap
     def GAP(self, Extension_penalty,Length,OpeningGapPenalty):
         return Extension_penalty * Length+OpeningGapPenalty
 
@@ -28,7 +30,6 @@ class MatchInformation(object):
             return mismatch
 
 class Alignment(MatchInformation):
-
     def __init__(self, DNA1, DNA2, match, mismatch, gap):
         MatchInformation.__init__(self, match,mismatch,gap)
         self.DNA1 = DNA1
@@ -91,10 +92,11 @@ class Alignment(MatchInformation):
                 if matrix[i,j] == (matrix[i,j-1] + self.GAP(1,0,1)):
 
 
-
 if __name__ == "__main__":
     DNA1 = "GCTGATATAGCT"
     DNA2 = "GGGTGATTAGCT"
     match = 0
     mismatch = 1
     gap = 1
+    myAlignment = Alignment(DNA1,DNA2,match,mismatch,gap)
+    myAlignment.EditDistance()
