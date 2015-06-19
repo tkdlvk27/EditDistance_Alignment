@@ -1,8 +1,18 @@
 import sys
 
 class MatchInformation(object):
-	#
+    def __init__(self, match, mismatch, gap):
+        self.match = match
+        self.mismatch = mismatch
+        self.gap = gap
 
 class Alignment(MatchInformation):
+    def __init__(self, DNA1, DNA2, match, mismatch, gap):
+        MatchInformation.__init__(self, match,mismatch,gap)
+        self.DNA1 = DNA1
+        self.DNA2 = DNA2
 
 if __name__ == "__main__":
+    #
+
+    
